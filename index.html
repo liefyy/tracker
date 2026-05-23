@@ -7,293 +7,120 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #0a0a0f;
-      --surface: #111118;
-      --border: #1e1e2e;
-      --accent: #7fff6e;
-      --accent2: #3ef0ff;
-      --muted: #3a3a52;
-      --text: #e0e0f0;
-      --text-dim: #7070a0;
+      --bg: #0a0a0f; --surface: #111118; --border: #1e1e2e;
+      --accent: #7fff6e; --accent2: #3ef0ff; --muted: #3a3a52;
+      --text: #e0e0f0; --text-dim: #7070a0;
     }
-
     body {
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg); color: var(--text);
       font-family: 'JetBrains Mono', monospace;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem;
-      overflow-x: hidden;
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 2rem 1rem; overflow-x: hidden;
     }
-
-    /* grid background */
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 48px 48px;
-      opacity: 0.4;
-      pointer-events: none;
-      z-index: 0;
+      content: ''; position: fixed; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px; opacity: 0.4; pointer-events: none; z-index: 0;
     }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 640px;
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      animation: fadeDown 0.5s ease both;
-    }
-
+    .container { position: relative; z-index: 1; width: 100%; max-width: 640px; }
+    .header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; animation: fadeDown 0.5s ease both; }
     .pulse-dot {
-      width: 12px;
-      height: 12px;
-      background: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--accent);
-      animation: pulse 1.8s infinite;
-      flex-shrink: 0;
+      width: 12px; height: 12px; background: var(--accent); border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent); animation: pulse 1.8s infinite; flex-shrink: 0;
     }
-
     @keyframes pulse {
       0%, 100% { opacity: 1; box-shadow: 0 0 12px var(--accent); }
       50% { opacity: 0.4; box-shadow: 0 0 4px var(--accent); }
     }
-
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -0.02em;
-    }
-
+    h1 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
     .badge {
-      margin-left: auto;
-      font-size: 0.65rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 99px;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      margin-left: auto; font-size: 0.65rem; padding: 0.25rem 0.6rem;
+      border-radius: 99px; border: 1px solid var(--accent); color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.1em;
     }
-
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-      animation: fadeUp 0.5s ease both;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; animation: fadeUp 0.5s ease both;
     }
-
     .card:nth-child(2) { animation-delay: 0.05s; }
     .card:nth-child(3) { animation-delay: 0.1s; }
     .card:nth-child(4) { animation-delay: 0.15s; }
-
     .card-label {
-      font-size: 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--text-dim);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--text-dim); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
     }
-
-    .card-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--border);
-      gap: 1rem;
-    }
-
+    .card-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px solid var(--border); gap: 1rem; }
     .row:last-child { border-bottom: none; }
-
-    .row-key {
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      flex-shrink: 0;
-    }
-
-    .row-val {
-      font-size: 0.8rem;
-      color: var(--text);
-      text-align: right;
-      word-break: break-all;
-    }
-
+    .row-key { font-size: 0.7rem; color: var(--text-dim); flex-shrink: 0; }
+    .row-val { font-size: 0.8rem; color: var(--text); text-align: right; word-break: break-all; }
     .row-val.highlight { color: var(--accent); }
     .row-val.highlight2 { color: var(--accent2); }
-
     .status-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1rem 1.5rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 0.75rem;
-      color: var(--text-dim);
+      display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.5rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; font-size: 0.75rem; color: var(--text-dim);
       animation: fadeUp 0.5s 0.2s ease both;
     }
-
     .status-icon { font-size: 1rem; }
-
     .status-bar.success { border-color: var(--accent); color: var(--accent); }
     .status-bar.error { border-color: #ff5e5e; color: #ff5e5e; }
     .status-bar.loading { border-color: var(--muted); }
-
     .spinner {
-      width: 14px;
-      height: 14px;
-      border: 2px solid var(--muted);
-      border-top-color: var(--accent2);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      flex-shrink: 0;
+      width: 14px; height: 14px; border: 2px solid var(--muted);
+      border-top-color: var(--accent2); border-radius: 50%;
+      animation: spin 0.8s linear infinite; flex-shrink: 0;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-    .config-notice {
-      margin-top: 1.5rem;
-      padding: 1rem 1.5rem;
-      border: 1px dashed var(--muted);
-      border-radius: 12px;
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      line-height: 1.6;
-      animation: fadeUp 0.5s 0.25s ease both;
-    }
-
-    .config-notice strong { color: var(--accent2); }
-
     .skeleton {
       display: inline-block;
       background: linear-gradient(90deg, var(--border) 25%, var(--muted) 50%, var(--border) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.2s infinite;
-      border-radius: 4px;
-      height: 0.8rem;
-      width: 120px;
+      background-size: 200% 100%; animation: shimmer 1.2s infinite;
+      border-radius: 4px; height: 0.8rem; width: 120px;
     }
-
     @keyframes shimmer { to { background-position: -200% 0; } }
   </style>
 </head>
 <body>
-
 <div class="container">
   <div class="header">
     <div class="pulse-dot"></div>
     <h1>Visit Tracker</h1>
     <div class="badge" id="visit-count">logging…</div>
   </div>
-
   <div class="card">
     <div class="card-label">Network</div>
-    <div class="row">
-      <span class="row-key">IP Address</span>
-      <span class="row-val highlight" id="val-ip"><span class="skeleton"></span></span>
-    </div>
-    <div class="row">
-      <span class="row-key">ISP</span>
-      <span class="row-val" id="val-isp"><span class="skeleton"></span></span>
-    </div>
-    <div class="row">
-      <span class="row-key">Country</span>
-      <span class="row-val" id="val-country"><span class="skeleton"></span></span>
-    </div>
-    <div class="row">
-      <span class="row-key">City / Region</span>
-      <span class="row-val" id="val-city"><span class="skeleton"></span></span>
-    </div>
+    <div class="row"><span class="row-key">IP Address</span><span class="row-val highlight" id="val-ip"><span class="skeleton"></span></span></div>
+    <div class="row"><span class="row-key">ISP</span><span class="row-val" id="val-isp"><span class="skeleton"></span></span></div>
+    <div class="row"><span class="row-key">Country</span><span class="row-val" id="val-country"><span class="skeleton"></span></span></div>
+    <div class="row"><span class="row-key">City / Region</span><span class="row-val" id="val-city"><span class="skeleton"></span></span></div>
   </div>
-
   <div class="card">
     <div class="card-label">Device</div>
-    <div class="row">
-      <span class="row-key">OS</span>
-      <span class="row-val highlight2" id="val-os">—</span>
-    </div>
-    <div class="row">
-      <span class="row-key">Browser</span>
-      <span class="row-val" id="val-browser">—</span>
-    </div>
-    <div class="row">
-      <span class="row-key">Device Type</span>
-      <span class="row-val" id="val-device">—</span>
-    </div>
-    <div class="row">
-      <span class="row-key">Screen</span>
-      <span class="row-val" id="val-screen">—</span>
-    </div>
+    <div class="row"><span class="row-key">OS</span><span class="row-val highlight2" id="val-os">—</span></div>
+    <div class="row"><span class="row-key">Browser</span><span class="row-val" id="val-browser">—</span></div>
+    <div class="row"><span class="row-key">Device Type</span><span class="row-val" id="val-device">—</span></div>
+    <div class="row"><span class="row-key">Screen</span><span class="row-val" id="val-screen">—</span></div>
   </div>
-
   <div class="card">
     <div class="card-label">Environment</div>
-    <div class="row">
-      <span class="row-key">Timezone</span>
-      <span class="row-val" id="val-tz">—</span>
-    </div>
-    <div class="row">
-      <span class="row-key">Language</span>
-      <span class="row-val" id="val-lang">—</span>
-    </div>
-    <div class="row">
-      <span class="row-key">Timestamp</span>
-      <span class="row-val" id="val-time">—</span>
-    </div>
+    <div class="row"><span class="row-key">Timezone</span><span class="row-val" id="val-tz">—</span></div>
+    <div class="row"><span class="row-key">Language</span><span class="row-val" id="val-lang">—</span></div>
+    <div class="row"><span class="row-key">Timestamp</span><span class="row-val" id="val-time">—</span></div>
   </div>
-
   <div class="status-bar loading" id="status-bar">
     <div class="spinner" id="spinner"></div>
     <span id="status-text">Collecting data and logging to sheet…</span>
   </div>
-
-  <div class="config-notice" id="config-notice" style="display:none">
-    ⚠️ <strong>Apps Script URL not set.</strong> Open this file in a text editor and replace <strong>YOUR_APPS_SCRIPT_URL_HERE</strong> with your deployed Apps Script web app URL.
-  </div>
 </div>
 
 <script>
-  // ─── CONFIGURATION ──────────────────────────────────────────────────
-  // Paste your Apps Script Web App URL here after deploying
-  const APPS_SCRIPT_URL = "YOUR_APPS_SCRIPT_URL_HERE";
-  // ────────────────────────────────────────────────────────────────────
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz4E95808dgiKhBGnCJ4He4Ho5A1xDonBSHq_daYH7FO4rkVzUAlMn4B-suxMvHyoZY/exec";
 
-  // ── Detect device info from user-agent ──
   function getOS(ua) {
     if (/Windows NT 10/.test(ua)) return "Windows 10/11";
     if (/Windows NT 6.3/.test(ua)) return "Windows 8.1";
@@ -306,7 +133,6 @@
     if (/Linux/.test(ua)) return "Linux";
     return "Unknown OS";
   }
-
   function getBrowser(ua) {
     if (/Edg\//.test(ua)) return "Microsoft Edge " + (ua.match(/Edg\/([\d.]+)/)?.[1] || "");
     if (/OPR\//.test(ua)) return "Opera " + (ua.match(/OPR\/([\d.]+)/)?.[1] || "");
@@ -316,27 +142,20 @@
     if (/Safari\//.test(ua) && /Version\//.test(ua)) return "Safari " + (ua.match(/Version\/([\d.]+)/)?.[1] || "");
     return "Unknown Browser";
   }
-
   function getDeviceType(ua) {
     if (/Mobi|Android|iPhone|iPod/.test(ua)) return "Mobile";
     if (/iPad|Tablet/.test(ua)) return "Tablet";
     return "Desktop";
   }
-
-  function setVal(id, val) {
-    const el = document.getElementById(id);
-    el.innerHTML = val || "—";
-  }
-
+  function setVal(id, val) { document.getElementById(id).innerHTML = val || "—"; }
   function setStatus(type, msg) {
     const bar = document.getElementById("status-bar");
     const spinner = document.getElementById("spinner");
-    const text = document.getElementById("status-text");
     bar.className = "status-bar " + type;
     spinner.style.display = type === "loading" ? "block" : "none";
-    text.textContent = msg;
-    if (type === "success") bar.insertAdjacentHTML("afterbegin", '<span class="status-icon">✓</span>');
-    if (type === "error") bar.insertAdjacentHTML("afterbegin", '<span class="status-icon">✗</span>');
+    document.getElementById("status-text").textContent = msg;
+    if (type === "success") bar.insertAdjacentHTML("afterbegin", '<span class="status-icon">✓ </span>');
+    if (type === "error") bar.insertAdjacentHTML("afterbegin", '<span class="status-icon">✗ </span>');
   }
 
   async function run() {
@@ -344,14 +163,13 @@
     const os = getOS(ua);
     const browser = getBrowser(ua);
     const deviceType = getDeviceType(ua);
-    const screen_res = `${screen.width}×${screen.height}`;
+    const screen_res = screen.width + "x" + screen.height;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const language = navigator.language || navigator.languages?.[0] || "—";
+    const language = navigator.language || "—";
     const timestamp = new Date().toISOString();
     const referrer = document.referrer || "Direct";
     const pageUrl = window.location.href;
 
-    // Fill in device info immediately
     setVal("val-os", os);
     setVal("val-browser", browser);
     setVal("val-device", deviceType);
@@ -360,60 +178,39 @@
     setVal("val-lang", language);
     setVal("val-time", new Date().toLocaleString());
 
-    // Check config
-    if (APPS_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbz4E95808dgiKhBGnCJ4He4Ho5A1xDonBSHq_daYH7FO4rkVzUAlMn4B-suxMvHyoZY/exec") {
-      document.getElementById("config-notice").style.display = "block";
-      setStatus("error", "Apps Script URL not configured — see note below.");
-      // Still fetch IP for display
-    }
-
-    // Fetch IP + geo info
-    let ipData = { ip: "Could not detect", org: "—", country_name: "—", country_code: "", city: "—", region: "—" };
+    // Fetch IP
+    let ip = "Could not detect";
+    let org = "—", country_name = "—", country_code = "", city = "—", region = "—";
     try {
       const ipRes = await fetch("https://api64.ipify.org?format=json");
       const ipJson = await ipRes.json();
-      ipData.ip = ipJson.ip;
+      ip = ipJson.ip;
       try {
-        const geoRes = await fetch(`https://ipapi.co/${ipJson.ip}/json/`);
+        const geoRes = await fetch("https://ipapi.co/" + ip + "/json/");
         const geo = await geoRes.json();
         if (!geo.error) {
-          ipData.org = geo.org || "—";
-          ipData.country_name = geo.country_name || "—";
-          ipData.country_code = geo.country_code || "";
-          ipData.city = geo.city || "—";
-          ipData.region = geo.region || "—";
+          org = geo.org || "—";
+          country_name = geo.country_name || "—";
+          country_code = geo.country_code || "";
+          city = geo.city || "—";
+          region = geo.region || "—";
         }
-      } catch { /* geo failed, IP still set */ }
-    } catch {
+      } catch(e) {}
+    } catch(e) {
       try {
         const r = await fetch("https://api.ipify.org?format=json");
-        const d = await r.json();
-        ipData.ip = d.ip;
-      } catch { /* all failed */ }
+        ip = (await r.json()).ip;
+      } catch(e) {}
     }
 
-    setVal("val-ip", ipData.ip || "—");
-    setVal("val-isp", ipData.org || "—");
-    setVal("val-country", `${ipData.country_name || "—"} ${ipData.country_code ? `(${ipData.country_code})` : ""}`);
-    setVal("val-city", `${ipData.city || "—"}, ${ipData.region || "—"}`);
-
+    setVal("val-ip", ip);
+    setVal("val-isp", org);
+    setVal("val-country", country_name + (country_code ? " (" + country_code + ")" : ""));
+    setVal("val-city", city + ", " + region);
     document.getElementById("visit-count").textContent = "logged";
 
-    if (APPS_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbz4E95808dgiKhBGnCJ4He4Ho5A1xDonBSHq_daYH7FO4rkVzUAlMn4B-suxMvHyoZY/exec") return;
-
     // Send to Google Sheets
-    const payload = {
-      timestamp,
-      ip: ipData.ip || "—",
-      country: ipData.country_name || "—",
-      city: ipData.city || "—",
-      region: ipData.region || "—",
-      isp: ipData.org || "—",
-      os, browser, deviceType,
-      screenResolution: screen_res,
-      timezone, language, referrer, pageUrl
-    };
-
+    const payload = { timestamp, ip, country: country_name, city, region, isp: org, os, browser, deviceType, screenResolution: screen_res, timezone, language, referrer, pageUrl };
     try {
       await fetch(APPS_SCRIPT_URL, {
         method: "POST",
@@ -422,8 +219,8 @@
         body: JSON.stringify(payload)
       });
       setStatus("success", "Visit logged to Google Sheets.");
-    } catch (err) {
-      setStatus("error", "Failed to log to sheet: " + err.message);
+    } catch(err) {
+      setStatus("error", "Failed to send: " + err.message);
     }
   }
 
