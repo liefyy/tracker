@@ -368,12 +368,28 @@
     }
 
     // Fetch IP + geo info
-    let ipData = {};
+    let ipData = { ip: "Could not detect", org: "—", country_name: "—", country_code: "", city: "—", region: "—" };
     try {
-      const res = await fetch("https://ipapi.co/json/");
-      ipData = await res.json();
+      const ipRes = await fetch("https://api64.ipify.org?format=json");
+      const ipJson = await ipRes.json();
+      ipData.ip = ipJson.ip;
+      try {
+        const geoRes = await fetch(`https://ipapi.co/${ipJson.ip}/json/`);
+        const geo = await geoRes.json();
+        if (!geo.error) {
+          ipData.org = geo.org || "—";
+          ipData.country_name = geo.country_name || "—";
+          ipData.country_code = geo.country_code || "";
+          ipData.city = geo.city || "—";
+          ipData.region = geo.region || "—";
+        }
+      } catch { /* geo failed, IP still set */ }
     } catch {
-      ipData = { ip: "unavailable", org: "—", country_name: "—", city: "—", region: "—" };
+      try {
+        const r = await fetch("https://api.ipify.org?format=json");
+        const d = await r.json();
+        ipData.ip = d.ip;
+      } catch { /* all failed */ }
     }
 
     setVal("val-ip", ipData.ip || "—");
@@ -388,11 +404,11 @@
     // Send to Google Sheets
     const payload = {
       timestamp,
-      ip: ipData.ip,
-      country: ipData.country_name,
-      city: ipData.city,
-      region: ipData.region,
-      isp: ipData.org,
+      ip: ipData.ip || "—",
+      country: ipData.country_name || "—",
+      city: ipData.city || "—",
+      region: ipData.region || "—",
+      isp: ipData.org || "—",
       os, browser, deviceType,
       screenResolution: screen_res,
       timezone, language, referrer, pageUrl
