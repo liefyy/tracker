@@ -290,7 +290,7 @@
 <script>
   // ─── CONFIGURATION ──────────────────────────────────────────────────
   // Paste your Apps Script Web App URL here after deploying
-  const APPS_SCRIPT_URL = "YOUR_APPS_SCRIPT_URL_HERE";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz4E95808dgiKhBGnCJ4He4Ho5A1xDonBSHq_daYH7FO4rkVzUAlMn4B-suxMvHyoZY/exec";
   // ────────────────────────────────────────────────────────────────────
 
   // ── Detect device info from user-agent ──
@@ -361,7 +361,7 @@
     setVal("val-time", new Date().toLocaleString());
 
     // Check config
-    if (APPS_SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE") {
+    if (APPS_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbz4E95808dgiKhBGnCJ4He4Ho5A1xDonBSHq_daYH7FO4rkVzUAlMn4B-suxMvHyoZY/exec") {
       document.getElementById("config-notice").style.display = "block";
       setStatus("error", "Apps Script URL not configured — see note below.");
       // Still fetch IP for display
